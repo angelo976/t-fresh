@@ -21,10 +21,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload site folder
+      - name: Upload root folder (publish repo root)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: .   # <--- publie la RACINE du dépôt
 
   deploy:
     environment:
