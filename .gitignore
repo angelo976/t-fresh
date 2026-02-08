@@ -1,0 +1,23 @@
+# Visual Studio / IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# OS / logs
+.DS_Store
+Thumbs.db
+*.log
