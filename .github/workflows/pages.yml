@@ -18,13 +18,89 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
+shopt -s extglob dotglob nullglob
+mkdir -p site
+git mv -f !(site|.git|.github) site/ 2>/dev/null || mv -f !(site|.git|.github) site/
+git add -A
+git commit -m "Move website into site/"
+git push
+# 0) Vérifie que tu es bien au bon endroit
+pwd
+# -> doit afficher: /c/Users/Utilisateur/source/repos/T-FRESH
+
+# 1) Ignore les fichiers IDE / build (dont .vs/)
+cat > .gitignore << 'IGN'
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build .NET
+bin/
+obj/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# OS / divers
+.DS_Store
+Thumbs.db
+*.log
+IGN
+git add .gitignore
+
+# 2) S'ils avaient été traqués par erreur, retire-les de l'index (mais pas du disque)
+git rm -r --cached .vs 2>/dev/null || true
+git rm -r --cached bin obj 2>/dev/null || true
+
+# 3) (Option) Nettoie les "deleted" en attente.
+#    -> Choisis UNE des deux options ci-dessous :
+
+# 3A) Tu veux garder ces fichiers (annule les suppressions locales) :
+# git restore .gitignore README.md docs/index.html PythonApplication1 T-FRESH.sln 2>/dev/null || true
+
+# 3B) Tu veux vraiment les enlever du repo (plus simple pour Pages) :
+git rm -r --cached PythonApplication1 2>/dev/null || true
+git rm -f --cached T-FRESH.sln 2>/dev/null || true
+git rm -r --cached docs 2>/dev/null || true
+
+# 4) Assure le workflow Pages qui publie le DOSSIER site/
+mkdir -p .github/workflows
+cat > .github/workflows/pages.yml << 'YAML'
+name: Deploy T-FRESH to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Upload site folder
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site  # <-- publie le dossier site/
+          path: site   # <-- publie le dossier site/
 
   deploy:
     environment:
