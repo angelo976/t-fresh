@@ -1,0 +1,23 @@
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build .NET
+bin/
+obj/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# OS / divers
+.DS_Store
+Thumbs.db
+*.log
