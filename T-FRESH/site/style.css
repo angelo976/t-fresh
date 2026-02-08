@@ -1,0 +1,521 @@
+﻿:root{
+  --blue:#0a74c9;
+  --blue-dark:#085a99;
+  --sky:#eaf6ff;
+  --card:#f2f8ff;
+  --ink:#1a1a1a;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,system-ui,-apple-system,sans-serif;color:var(--ink);background:#fff}
+img{max-width:100%;display:block}
+
+/* Header */
+.topbar{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 7.5vw;background:#ffffffcc;backdrop-filter:blur(6px);z-index:20;border-bottom:1px solid #eef3f7
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{height:36px;width:auto}
+.wordmark{font-weight:800;color:var(--blue);letter-spacing:.5px}
+.nav a{margin-left:20px;color:var(--blue);text-decoration:none;font-weight:600}
+.nav a:hover{color:var(--blue-dark)}
+
+/* Hero slider */
+.hero{margin-top:72px}
+.slider{position:relative;height:78vh;min-height:520px;overflow:hidden;background:#000}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+.slide.active{opacity:1;z-index:1}
+.slide img{width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(1.02)}
+.caption{
+  position:absolute;inset:auto 7% 10% 7%;
+  color:#fff;text-align:center;text-shadow:0 8px 32px rgba(0,0,0,.35)
+}
+.caption h1{font-size:clamp(32px,5vw,64px);margin:.2em 0 .25em}
+.caption p{font-size:clamp(14px,1.8vw,20px);margin:0 0 1em}
+.cta{display:inline-block;background:var(--blue);color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700}
+.cta:hover{background:var(--blue-dark)}
+.nav-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:#ffffffaa;border:none;border-radius:999px;width:42px;height:42px;font-size:26px;
+  display:grid;place-items:center;cursor:pointer;z-index:2
+}
+.prev{left:18px} .next{right:18px}
+.dots{position:absolute;left:0;right:0;bottom:14px;display:flex;gap:8px;justify-content:center;z-index:2}
+.dots button{width:8px;height:8px;border-radius:50%;border:none;background:#ffffff77}
+.dots button.active{background:#fff}
+
+/* Sections */
+.section{padding:80px 7.5vw;text-align:center}
+.section h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 12px;color:var(--blue-dark)}
+.section p{max-width:860px;margin:0 auto 24px}
+
+/* Feature cards */
+.features{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:18px}
+.card{background:var(--card);border-radius:12px;padding:18px 20px;min-width:240px;max-width:320px}
+
+/* Products */
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;justify-items:center;margin-top:24px}
+.product{width:100%;max-width:320px;background:var(--card);border-radius:14px;padding:16px;text-align:center;
+  box-shadow:0 6px 22px rgba(10,116,201,.06)}
+.product img{border-radius:12px;aspect-ratio:3/4;object-fit:cover}
+.product h3{margin:10px 0 8px}
+.price{display:inline-block;margin-top:6px;color:var(--blue);font-weight:800}
+
+/* Gallery */
+.gallery{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:18px}
+.gal{width:min(31%,360px);border-radius:12px;box-shadow:0 6px 24px rgba(10,116,201,.08)}
+
+/* Footer */
+.footer{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:26px 7.5vw;background:var(--sky);border-top:1px solid #eef3f7}
+
+@media (max-width:1024px){
+  .products{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .slider{height:64vh;min-height:420px}
+  .products{grid-template-columns:1fr}
+  .gal{width:100%}
+}
+
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+
+    .slide.active {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* Gradation douce pour garantir le contraste du texte */
+        background: linear-gradient( to bottom, rgba(0,0,0,.32) 0%, rgba(0,0,0,.36) 60%, rgba(0,0,0,.44) 100% );
+        pointer-events: none;
+    }
+
+/* Légende plus lisible (sans changer le HTML) */
+.caption {
+    position: absolute;
+    inset: auto 7% 10% 7%;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 3px rgba(0,0,0,.35), 0 8px 28px rgba(0,0,0,.45);
+}
+
+    /* Pastille semi-opaque SOUS le texte (pas besoin d’ajouter de <div>) */
+    .caption::before {
+        content: "";
+        position: absolute;
+        inset: -14px -18px -16px -18px;
+        background: rgba(0,0,0,.55);
+        border-radius: 14px;
+        filter: saturate(1.05) contrast(1.05);
+        /* flou d’arrière-plan quand dispo (n’affecte pas la compatibilité) */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: -1;
+    }
+
+    /* Titres et paragraphes : tailles et rythme lisibles */
+    .caption h1 {
+        margin: 0 0 8px;
+        font-size: clamp(32px,5vw,64px);
+        line-height: 1.05;
+        letter-spacing: .2px;
+    }
+
+    .caption p {
+        margin: 0 0 14px;
+        font-size: clamp(14px,1.8vw,20px);
+        line-height: 1.35;
+    }
+
+/* Bouton CTA plus visible */
+.cta {
+    display: inline-block;
+    background: #0a74c9;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.25);
+    box-shadow: 0 6px 22px rgba(10,116,201,.35);
+}
+
+    .cta:hover {
+        background: #085a99;
+        box-shadow: 0 8px 28px rgba(10,116,201,.45);
+    }
+
+/* Header plus lisible sur image */
+.topbar {
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e6eef6;
+}
+
+/* Points & flèches du slider (optionnel) */
+.dots button {
+    background: #ffffff88;
+}
+
+    .dots button.active {
+        background: #fff;
+    }
+
+.nav-btn {
+    background: #ffffffcc;
+}
+
+    .nav-btn:hover {
+        background: #ffffff;
+    }
+
+/* Mode contraste renforcé (préférence OS) */
+@media (prefers-contrast: more) {
+    .slide::after {
+        background: rgba(0,0,0,.58);
+    }
+
+    .caption::before {
+        background: rgba(0,0,0,.60);
+    }
+
+    .cta {
+        border-color: #fff;
+    }
+}
+
+/* Mobile : pastille compacte mais lisible */
+@media (max-width: 600px) {
+    .caption {
+        inset: auto 5% 8% 5%;
+    }
+
+        .caption::before {
+            inset: -10px -12px -12px -12px;
+            border-radius: 10px;
+        }
+}
+
+/* === PATCH LISIBILITÉ TEXTE SLIDER (à coller en fin de style.css) === */
+
+/* 1) Assombrir l'image de chaque slide (overlay) */
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient( to bottom, rgba(0,0,0,0.45) 0%, /* augmente ce chiffre si tu veux + sombre (ex. 0.55) */
+    rgba(0,0,0,0.50) 60%, rgba(0,0,0,0.60) 100% );
+    pointer-events: none;
+}
+
+/* 2) Légende bien lisible (ombre + pastille auto) */
+.caption {
+    position: absolute;
+    inset: auto 7% 10% 7%;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 3px 4px rgba(0,0,0,.55), 0 8px 32px rgba(0,0,0,.75);
+}
+    /* Pastille sous le bloc de texte (sans modifier le HTML) */
+    .caption::before {
+        content: "";
+        position: absolute;
+        inset: -20px -24px -22px -24px;
+        background: rgba(0,0,0,0.55); /* ↑ mets 0.60–0.65 si tu veux encore + lisible */
+        border-radius: 18px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: -1;
+    }
+
+/* 3) Bouton plus visible */
+.cta {
+    background: #0d8bff !important; /* bleu plus lumineux */
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.45);
+    padding: 12px 28px;
+    font-weight: 700;
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 26px rgba(0,0,0,.45);
+}
+
+    .cta:hover {
+        background: #006ac7 !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,.55);
+    }
+/* ================================
+   Contour du texte (couleur logo)
+   pour les slides animés (HERO)
+   — à coller en fin de style.css —
+   ================================ */
+
+:root {
+    /* Mets ici le bleu exact de ton logo si différent */
+    --logo-blue: #0a74c9;
+}
+
+/* TITRE du slide : contour + ombre */
+.hero .caption h1 {
+    /* Couleur de remplissage (texte) */
+    color: #ffffff;
+    /* Contour net (navigateurs WebKit/Chromium/Edge/Safari) */
+    -webkit-text-stroke: 2px var(--logo-blue);
+    /* Fallback multi-navigateurs : empilement d’ombres pour simuler l’outline */
+    text-shadow:
+    /* anneau fin de la couleur du logo autour des lettres */
+    0 0 0 var(--logo-blue), 1px 0 0 var(--logo-blue), -1px 0 0 var(--logo-blue), 0 1px 0 var(--logo-blue), 0 -1px 0 var(--logo-blue), 1px 1px 0 var(--logo-blue), -1px 1px 0 var(--logo-blue), 1px -1px 0 var(--logo-blue), -1px -1px 0 var(--logo-blue),
+    /* ombre douce pour le relief et la lisibilité sur image */
+    0 8px 28px rgba(0,0,0,.55);
+}
+
+/* SOUS-TITRE du slide : contour plus discret */
+.hero .caption p {
+    color: #ffffff;
+    -webkit-text-stroke: 1px var(--logo-blue);
+    text-shadow: 0 0 0 var(--logo-blue), 1px 0 0 var(--logo-blue), -1px 0 0 var(--logo-blue), 0 1px 0 var(--logo-blue), 0 -1px 0 var(--logo-blue),
+    /* ombre plus légère que le titre */
+    0 6px 18px rgba(0,0,0,.45);
+}
+
+/* Bouton du slide : bord + glow léger couleur logo */
+.hero .caption .cta {
+    border: 2px solid var(--logo-blue);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.15) inset, 0 10px 26px rgba(0,0,0,.45), 0 0 18px rgba(10,116,201,.35);
+}
+
+    .hero .caption .cta:hover {
+        box-shadow: 0 0 0 2px rgba(255,255,255,.2) inset, 0 12px 32px rgba(0,0,0,.55), 0 0 22px rgba(10,116,201,.55);
+    }
+
+/* Option : un peu plus d’épaisseur sur mobiles pour compenser la taille */
+@media (max-width: 600px) {
+    .hero .caption h1 {
+        -webkit-text-stroke: 2.2px var(--logo-blue);
+    }
+
+    .hero .caption p {
+        -webkit-text-stroke: 1.2px var(--logo-blue);
+    }
+}
+
+/* === GLOW LÉGER SUR LE TEXTE DU SLIDER (remplace le contour bleu) === */
+
+/* 0) (Optionnel) rend l’overlay un peu moins sombre qu’avant */
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* assombrissement plus doux qu’avant */
+    background: linear-gradient( to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.42) 60%, rgba(0,0,0,0.50) 100% );
+    pointer-events: none;
+}
+
+/* 1) Titre : texte blanc + halo bleu doux + légère ombre sombre */
+.hero .caption h1 {
+    /* retirer tout éventuel contour précédent */
+    -webkit-text-stroke: 0 transparent !important;
+    color: #ffffff;
+    /* Glow bleu subtil + ombre de lisibilité */
+    text-shadow:
+    /* halo externe bleu (glow) */
+    0 0 10px rgba(10,116,201,0.40), 0 0 20px rgba(10,116,201,0.30), 0 0 36px rgba(10,116,201,0.20),
+    /* ombre douce pour lecture */
+    0 3px 8px rgba(0,0,0,0.45);
+}
+
+/* 2) Sous-titre : glow plus léger encore */
+.hero .caption p {
+    -webkit-text-stroke: 0 transparent !important;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(10,116,201,0.28), 0 0 16px rgba(10,116,201,0.18), 0 2px 6px rgba(0,0,0,0.35);
+}
+
+/* 3) Bouton : moins “opaque”, plus aéré mais lisible */
+.hero .caption .cta {
+    background: #0b84e6;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 24px rgba(10,116,201,0.30);
+}
+
+    .hero .caption .cta:hover {
+        background: #0a74c9;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.12) inset, 0 12px 30px rgba(10,116,201,0.40);
+    }
+
+/* 4) Pastille sous la légende : un cran plus léger pour laisser respirer l’image */
+.caption::before {
+    content: "";
+    position: absolute;
+    inset: -16px -20px -18px -20px;
+    background: rgba(0,0,0,0.40); /* était ~0.55, on allège */
+    border-radius: 16px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+/* 5) Mobile : halo un poil plus fort (texte plus petit) */
+@media (max-width: 600px) {
+    .hero .caption h1 {
+        text-shadow: 0 0 10px rgba(10,116,201,0.45), 0 0 20px rgba(10,116,201,0.32), 0 0 36px rgba(10,116,201,0.22), 0 3px 8px rgba(0,0,0,0.50);
+    }
+
+    .hero .caption p {
+        text-shadow: 0 0 8px rgba(10,116,201,0.32), 0 0 16px rgba(10,116,201,0.20), 0 2px 6px rgba(0,0,0,0.40);
+    }
+}
+
+/* ============================
+   BOOST VISIBILITÉ PETIT TEXTE
+   (sous-titre du slider)
+   ============================ */
+
+/* 1) Légère hausse de lisibilité globale du slide */
+.slide::after {
+    /* si déjà présent, on assombrit juste un chouïa pour aider le sous-texte */
+    background: linear-gradient( to bottom, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.46) 60%, rgba(0,0,0,0.54) 100% );
+}
+
+/* 2) Cible uniquement le PETIT TEXTE du slider */
+.hero .caption p {
+    /* taille & graisse un peu supérieures pour compenser les fonds clairs */
+    font-size: clamp(15px, 1.9vw, 20px);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #fff;
+    /* halo bleu TRÈS discret + ombre sombre courte => contraste sans “baver” */
+    text-shadow: 0 0 8px rgba(10,116,201,0.22), 0 0 14px rgba(10,116,201,0.16), 0 2px 5px rgba(0,0,0,0.40);
+    /* supprime tout éventuel contour précédent */
+    -webkit-text-stroke: 0 transparent !important;
+    /* nécessaire pour la pastille (pseudo-élément) */
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+    /* 3) Micro‑pastille sous le petit texte (plus légère que celle du bloc) */
+    .hero .caption p::before {
+        content: "";
+        position: absolute;
+        inset: -6px -10px -6px -10px; /* marge autour de la ligne */
+        background: rgba(0,0,0,0.34); /* opacité modérée (peut monter à .40 si besoin) */
+        border-radius: 10px;
+        backdrop-filter: blur(3px); /* flou doux, si dispo */
+        -webkit-backdrop-filter: blur(3px);
+        z-index: -1; /* sous le texte, au dessus de l’image */
+    }
+
+/* 4) Un peu plus de punch sur mobile (texte plus petit) */
+@media (max-width: 600px) {
+    .hero .caption p {
+        font-size: clamp(15px, 2.8vw, 18px);
+        text-shadow: 0 0 8px rgba(10,116,201,0.26), 0 0 16px rgba(10,116,201,0.18), 0 2px 6px rgba(0,0,0,0.45);
+    }
+
+        .hero .caption p::before {
+            inset: -5px -8px -5px -8px;
+            background: rgba(0,0,0,0.38);
+        }
+}
+
+
+.hero .slider .slide:nth-child(3) .caption {
+    inset: auto 7% 6% 7%; /* au lieu de 10% : on rapproche du bas */
+}
+
+    /* 2) Espace le bouton sous le petit texte */
+    .hero .slider .slide:nth-child(3) .caption .cta {
+        margin-top: 14px;
+    }
+
+/* 3) Glow bleu un peu plus visible (titre + sous-texte) */
+:root {
+    --logo-blue: #0a74c9;
+}
+/* remplace par le bleu exact du logo si besoin */
+
+.hero .slider .slide:nth-child(3) .caption h1 {
+    -webkit-text-stroke: 0 transparent !important;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(10,116,201,0.50), /* glow bleu un cran au-dessus */
+    0 0 24px rgba(10,116,201,0.36), 0 4px 10px rgba(0,0,0,0.55); /* lisibilité sur image */
+}
+
+.hero .slider .slide:nth-child(3) .caption p {
+    -webkit-text-stroke: 0 transparent !important;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(10,116,201,0.34), 0 0 18px rgba(10,116,201,0.22), 0 3px 8px rgba(0,0,0,0.48);
+}
+
+/* 4) Bouton avec liseré et glow bleu un peu plus marqué sur cette slide */
+.hero .slider .slide:nth-child(3) .caption .cta {
+    border: 2px solid var(--logo-blue);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.14) inset, 0 10px 26px rgba(0,0,0,0.45), 0 0 20px rgba(10,116,201,0.45); /* halo bleu */
+}
+
+    .hero .slider .slide:nth-child(3) .caption .cta:hover {
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.18) inset, 0 12px 32px rgba(0,0,0,0.55), 0 0 26px rgba(10,116,201,0.60);
+    }
+
+/* Mobile : un cran de glow supplémentaire (texte plus petit) */
+@media (max-width: 600px) {
+    .hero .slider .slide:nth-child(3) .caption h1 {
+        text-shadow: 0 0 12px rgba(10,116,201,0.56), 0 0 24px rgba(10,116,201,0.40), 0 4px 12px rgba(0,0,0,0.60);
+    }
+
+    .hero .slider .slide:nth-child(3) .caption p {
+        text-shadow: 0 0 10px rgba(10,116,201,0.38), 0 0 18px rgba(10,116,201,0.26), 0 3px 8px rgba(0,0,0,0.52);
+    }
+}
+
+.hero .caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centrage horizontal */
+    gap: 10px; /* espace par défaut entre les éléments */
+}
+
+    /* Assure l’ordre : 1=titre, 2=descriptif, 3=bouton (utile si d’anciens styles perturbent l’ordre) */
+    .hero .caption h1 {
+        order: 1;
+    }
+
+    .hero .caption p {
+        order: 2;
+    }
+
+    .hero .caption .cta {
+        order: 3;
+        display: inline-block;
+        margin-top: 8px; /* espace supplémentaire au-dessus du bouton */
+    }
+
+/* Un peu plus d’air en bas de la slide, pour que le CTA ne soit pas collé au bord inférieur */
+.hero .caption {
+    inset: auto 7% 8% 7%; /* (avant 10%) on rapproche légèrement du bas */
+}
+
+/* Sur mobile : on laisse encore un peu d’air et on augmente l’écart avant le bouton */
+@media (max-width: 600px) {
+    .hero .caption {
+        inset: auto 6% 7% 6%;
+        gap: 8px;
+    }
+
+        .hero .caption .cta {
+            margin-top: 10px;
+        }
+}
