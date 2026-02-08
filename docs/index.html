@@ -1,3 +1,134 @@
-<!doctype html><html lang="fr"><meta charset="utf-8"><title>T‑FRESH</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<h1>Bienvenue sur T‑FRESH</h1><p>Déployé via GitHub Pages 🎉</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T‑FRESH — Chemise maillée rafraîchissante</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo T‑FRESH" class="logo" />
+    <span class="wordmark">T‑FRESH</span>
+  </div>
+  <nav class="nav">
+    <a href="#concept">Concept</a>
+    <a href="#collection">Collection</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+    <!-- SLIDE SPORT / VOLLEY PLAGE -->
+    <div class="slide">
+        <img src="img/homme_sport_volley.png"
+             alt="T‑FRESH Sport — Volley sur la plage" />
+        <div class="caption">
+            <h1>Performance & fraîcheur</h1>
+            <p>La chemise T‑FRESH Sport : liberté, légèreté et confort en plein mouvement.</p>
+            <a class="cta" href="#sport">Découvrir la gamme Sport</a>
+        </div>
+    </div>
+
+    <!-- HERO : slider premium -->
+    <section class="hero">
+        <div class="slider" id="slider">
+
+            <div class="slide active">
+                <img src="img/femme_face.png" alt="T‑FRESH — Femme face" />
+                <div class="caption">
+                    <h1>Collection Fraîcheur</h1>
+                    <p>Chemise maillée en coton premium — fabriquée en France.</p>
+                    <a class="cta" href="#collection">Découvrir</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="img/femme_34.png" alt="T‑FRESH — Femme trois‑quarts" />
+                <div class="caption">
+                    <h1>Respirante & légère</h1>
+                    <p>Structure micro‑aérée, sensation rafraîchissante tout l’été.</p>
+                    <a class="cta" href="#collection">Voir les modèles</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="img/homme_face.png" alt="T‑FRESH — Homme face" />
+                <div class="caption">
+                    <h1>Logo discret</h1>
+                    <p>Marquage minimal côté cœur pour un style élégant.</p>
+                    <a class="cta" href="#collection">Commander</a>
+                </div>
+            </div>
+
+            <button class="nav-btn prev" aria-label="Précédent">‹</button>
+            <button class="nav-btn next" aria-label="Suivant">›</button>
+            <div class="dots" id="dots"></div>
+        </div>
+    </section>
+
+    <!-- Concept -->
+    <section id="concept" class="section">
+        <h2>Le concept T‑FRESH</h2>
+        <p>Chemise maillée rafraîchissante en coton premium : régulation de la
+            température, absorption de l’humidité et séchage rapide.</p>
+
+        <div class="features">
+            <div class="card"><h3>🌬️ Micro‑maille</h3><p>Tricot aéré</p></div>
+            <div class="card"><h3>🧵 Coton premium</h3><p>Respirant et durable</p></div>
+            <div class="card"><h3>🇫🇷 Fabriqué en France</h3><p>Qualité maîtrisée</p></div>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section id="collection" class="section">
+        <h2>Collection</h2>
+        <div class="products">
+            <article class="product">
+                <img src="img/femme_face.png" alt="" loading="lazy" />
+                <h3>Femme — Face</h3>
+                <p>49,90€</p>
+            </article>
+
+            <article class="product">
+                <img src="img/femme_profil.png" alt="" loading="lazy" />
+                <h3>Femme — Profil</h3>
+                <p>49,90€</p>
+            </article>
+
+            <article class="product">
+                <img src="img/homme_face.png" alt="" loading="lazy" />
+                <h3>Homme — Face</h3>
+                <p>49,90€</p>
+            </article>
+
+            <article class="product">
+                <img src="img/homme_sport_volley.png" alt="" loading="lazy" />
+                <h3>Homme — Sport</h3>
+                <p>59,90€</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <section id="galerie" class="section">
+        <h2>Galerie</h2>
+        <div class="gallery">
+            <img src="img/femme_face.png" class="gal" />
+            <img src="img/femme_profil.png" class="gal" />
+            <img src="img/femme_34.png" class="gal" />
+            <img src="img/homme_face.png" class="gal" />
+        </div>
+    </section>
+</main>
+
+<footer id="contact" class="footer">
+  <div><strong>Contact</strong><br />contact@t-fresh.fr</div>
+  <div>© 2026 T‑FRESH — Tous droits réservés</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
